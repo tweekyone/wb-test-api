@@ -86,14 +86,19 @@ public class WildberriesRestClient {
         return result.getBody();
     }
 
-    public String refreshStocks(String warehouseId, RequestStocks stocks) {
-        ResponseEntity<Void> result = restTemplate.exchange(
-                "/api/v3/stocks/{0}",
-                HttpMethod.PUT,
-                getHttpEntityStocks(stocks),
-                Void.class,
-                warehouseId);
-        return result.getStatusCode().toString();
+    public HttpStatusCode refreshStocks(Long warehouseId, RequestStocks stocks) {
+        try {
+            ResponseEntity<Void> result = restTemplate.exchange(
+                    "/api/v3/stocks/{0}",
+                    HttpMethod.PUT,
+                    getHttpEntityStocks(stocks),
+                    Void.class,
+                    warehouseId);
+            return result.getStatusCode();
+        } catch (HttpClientErrorException ex) {
+            ResponseStockError responseBodyAs = ex.getResponseBodyAs(ResponseStockError.class);
+            return ex.getStatusCode();
+        }
     }
 
     private HttpEntity<RequestStocks> getHttpEntityStocks (RequestStocks stocks) {

@@ -18,7 +18,7 @@ public class RequestStocks {
     @AllArgsConstructor
     public class Stock {
         private String sku;
-        private int amount;
+        private Integer amount;
     }
 }
 
