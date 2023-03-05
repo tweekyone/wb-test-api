@@ -16,7 +16,7 @@ public class StockRemainsController {
     @GetMapping("/stocks")
     public ResponseEntity<String> updateStocks() {
         RequestStocks requestStocks = new RequestStocks();
-        RequestStocks.Stock stock = requestStocks.new Stock("BarcodeTest123", 10);
+        RequestStocks.Stock stock = new RequestStocks.Stock("BarcodeTest123", 10);
         requestStocks.setRequestStocks(Arrays.asList(stock));
 
         client.refreshStocks(140313L, requestStocks);

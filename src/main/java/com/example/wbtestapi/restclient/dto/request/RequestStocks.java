@@ -16,7 +16,7 @@ public class RequestStocks {
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    public class Stock {
+    public static class Stock {
         private String sku;
         private Integer amount;
     }
